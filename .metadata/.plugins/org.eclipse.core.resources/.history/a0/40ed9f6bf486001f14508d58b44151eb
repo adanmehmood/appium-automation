@@ -1,0 +1,40 @@
+package adanautomation.Appium;
+
+import org.openqa.selenium.By;
+import org.testng.annotations.Test;
+
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.options.UiAutomator2Options;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+
+public class AppiumMain {
+	
+	
+	private AndroidDriver driver;
+	
+	@Test 
+	public void appiumTest() throws MalformedURLException {
+		
+		UiAutomator2Options options = new UiAutomator2Options() ;
+		
+		options.setDeviceName("emulator-5554");
+        options.setPlatformName("Android");
+        options.setAppPackage("com.mobile.number.location.call.number.locator.call.tracker");
+        options.setAppActivity("com.number.tracker.numbertracker.activities.SplashActivity");
+		
+		
+		 driver = new AndroidDriver(new URL ("http://127.0.0.1:4723/wd/hub"), options);
+		 
+		// driver.findElement(By.id("com.example.app:id/button")).click();
+		 
+		// driver.quit();
+		 
+		
+	}
+	
+
+
+}
+
