@@ -21,6 +21,8 @@ import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.devtools.HasDevTools;
 import org.openqa.selenium.devtools.v112.dom.DOM;
 import org.openqa.selenium.devtools.v112.page.Page;
+import org.openqa.selenium.logging.LogEntries;
+import org.openqa.selenium.logging.LogEntry;
 import org.openqa.selenium.devtools.DevTools;
 
 
@@ -49,6 +51,9 @@ public class AdsClass {
     
     @AndroidFindBy(xpath = "//android.widget.Button[@index='0' and @clickable='true' and @enabled='true']")
     private WebElement rewardDismiss;
+    
+    @AndroidFindBy(id = "com.mobile.number.location.call.number.locator.call.tracker:id/progressBar")
+    private WebElement waitAdLoading;
 
 
     // Method to switch to WebView context
@@ -77,6 +82,70 @@ public class AdsClass {
     }
     
     
+    public void monitorLogcat() {
+        LogEntries logs = driver.manage().logs().get("logcat");
+
+        for (LogEntry entry : logs) {
+            String logMessage = entry.getMessage();
+            if (logMessage.contains("Interstitial ad loaded")) {
+                System.out.println("Ad is loaded");
+            } else if (logMessage.contains("Ad shown")) {
+                System.out.println("Ad displayed.");
+                break;  // Exit loop once loading completes
+            }
+        }
+    }
+    
+    public void handleAdLoadingWithProgressBar() {
+        try {
+            System.out.println("Waiting for 7 seconds to monitor logcat for ad loading...");
+
+            // Wait for 7 seconds (progress bar delay)
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(7));
+            boolean isProgressBarVisible = wait.until(ExpectedConditions.visibilityOf(waitAdLoading)) != null;
+
+            if (isProgressBarVisible) {
+                System.out.println("Progress bar is displayed, monitoring logcat...");
+
+                // Monitor logcat for ad-related messages
+                LogEntries logs = driver.manage().logs().get("logcat");
+                boolean isAdLoadedFromLogcat = false;
+
+                for (LogEntry entry : logs) {
+                    String logMessage = entry.getMessage();
+                    if (logMessage.contains("Interstitial ad loaded")) {
+                        System.out.println("Logcat: Ad is loaded.");
+                        
+                        isAdLoadedFromLogcat = true;
+                        break; // Ad is loaded, no need to check further
+                    } else if (logMessage.contains("onAdFailedToLoad")) {
+                        System.out.println("Logcat: Ad failed to load.");
+                        break; // Ad failed to load, exit loop
+                    }
+                }
+
+                // Check if progress bar disappears (indicating ad loading completion)
+                boolean isAdLoadedFromProgressBar = wait.until(ExpectedConditions.invisibilityOf(waitAdLoading));
+
+                if (isAdLoadedFromLogcat || isAdLoadedFromProgressBar) {
+                    System.out.println("Ad loaded successfully.");
+                    dismissInterstitialAdIfPresent();
+                } else {
+                    System.out.println("Ad did not load within 7 seconds. Proceeding to the next activity...");
+                }
+            } else {
+                System.out.println("Progress bar is not displayed. No ad loading.");
+            }
+        } catch (Exception e) {
+            System.err.println("An error occurred: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+    
+    
+    
+    
+    
 
     // Method to dismiss the interstitial ad if present
     public void dismissInterstitialAdIfPresent() {
@@ -84,6 +153,7 @@ public class AdsClass {
             WebDriverWait adWait = new WebDriverWait(driver, Duration.ofSeconds(30));
             adWait.until(ExpectedConditions.visibilityOf(interAdBtn));
             interAdBtn.click();
+            System.out.println("dismissing.");
         } catch (Exception e) {
             System.out.println("Interstitial ad was not displayed, proceeding without dismissing.");
         }
