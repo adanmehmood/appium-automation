@@ -74,7 +74,12 @@ public class HomeScreen {
 		
 			@AndroidFindBy(xpath = "//android.widget.ImageButton[@content-desc=\"Interstitial close button\"] | //android.widget.ImageView[@resource-id=\"com.mobile.number.location.call.number.locator.call.tracker:id/iv_close\"]")
 			private WebElement interAdBtn;
-
+			
+			@AndroidFindBy(id = "com.mobile.number.location.call.number.locator.call.tracker:id/iv_close")
+			private WebElement closeEventDialog ;
+			
+			@AndroidFindBy(id ="com.mobile.number.location.call.number.locator.call.tracker:id/cl_parent")
+			private WebElement eventDiaog;
 			
 			@AndroidFindBy(xpath = "//*[@resource-id='com.mobile.number.location.call.number.locator.call.tracker:id/iv_back' or @resource-id='com.mobile.number.location.call.number.locator.call.tracker:id/iv_close' or @content-desc='Navigate up']")
 			private WebElement backBtn;
@@ -105,8 +110,7 @@ public class HomeScreen {
 			 	public WebElement getNumberLocatorBtn() {
 			 		return numberLocatorBtn;
 			 	}
-			 	
-			 	
+			
 				public void homeNumberLoctorBtn() {
 				    wait.until(ExpectedConditions.visibilityOf(numberLocatorBtn));
 				    numberLocatorBtn.click();

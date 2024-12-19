@@ -49,14 +49,11 @@ public class NumberLocatorScreen {
 	    }
 		
 		@AndroidFindBy(id="com.mobile.number.location.call.number.locator.call.tracker:id/rlClickConsumer")
-		
 		private WebElement countrySe;
 				
 		@AndroidFindBy(xpath = "//android.widget.TextView[@resource-id='com.mobile.number.location.call.number.locator.call.tracker:id/textView_countryName' and @text='Pakistan (PK)']")
 		private WebElement searchCountry;
 
-
-		
 		@AndroidFindBy(id="com.mobile.number.location.call.number.locator.call.tracker:id/editText_search")
 		
 		private WebElement enterCountryName;
@@ -81,8 +78,18 @@ public class NumberLocatorScreen {
 		@AndroidFindBy(xpath = "//*[@resource-id='com.mobile.number.location.call.number.locator.call.tracker:id/iv_back' or @resource-id='com.mobile.number.location.call.number.locator.call.tracker:id/iv_close' or @content-desc='Navigate up']")
 		private WebElement backBtn;
 		
-		@AndroidFindBy(xpath = "")
+		@AndroidFindBy(id = "com.mobile.number.location.call.number.locator.call.tracker:id/iv_contacts")
 		private WebElement contactListBtn;
+		
+		@AndroidFindBy(id = "com.mobile.number.location.call.number.locator.call.tracker:id/et_search")
+		private WebElement enterContactName;
+		
+		@AndroidFindBy(xpath = "//androidx.recyclerview.widget.RecyclerView[@resource-id=\"com.mobile.number.location.call.number.locator.call.tracker:id/rv\"]/android.view.ViewGroup")
+		private WebElement selectNumber;
+		
+		
+		
+		
 		
 	
 

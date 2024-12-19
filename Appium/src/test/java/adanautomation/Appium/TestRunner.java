@@ -32,16 +32,19 @@ public class TestRunner extends AppiumMain {
     @Test
     public void Example() throws InterruptedException {
        pageManager.getPermissionsUtils().allowContactAndroidPermission();
+       pageManager.getAdsClass().monitorLogcat();
     }
 
     
     
     @Test
-    public void Example2() throws InterruptedException {
+    public void TrackerAndGeoFence() throws InterruptedException {
     	mobileGestures.scrollAndClick(() -> 
     	pageManager.getHomeScreen().getPhoneTrackerBtn());
-        pageManager.getAdsClass().dismissInterstitialAdIfPresent();
-        //pageManager.getImageRec().colapseAd(0.25);
+    	pageManager.getPermissionsUtils().allowContactAndroidPermission();
+        pageManager.getAdsClass().handleAdLoadingWithProgressBar();
+        pageManager.getImageRec().colapseAd(0.25);
+        
         pageManager.getHomeScreen().pressBackBtn();
          
     } 
