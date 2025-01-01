@@ -5,8 +5,9 @@
     <classes>
       <class name="adanautomation.Appium.TestRunner">
         <methods>
-          <include name="Example2"/>
+          <include name="NumberSearchFeature"/>
           <include name="setUp"/>
+          <include name="setup"/>
         </methods>
       </class> <!-- adanautomation.Appium.TestRunner -->
     </classes>

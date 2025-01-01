@@ -20,7 +20,10 @@ public class TestRunner extends AppiumMain {
 
     @BeforeClass
     public void setUp() throws MalformedURLException {
-    	appiumTest();
+    	
+    	if (driver == null) {
+            throw new IllegalStateException("Driver is not initialized. Check AppiumMain setup.");
+        }
         // Initialize PageManager with the driver
         pageManager = new PageManager(driver);
         mobileGestures = new MobileGestures(driver);

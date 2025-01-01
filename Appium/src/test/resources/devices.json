@@ -1,0 +1,17 @@
+{
+    "devices": [
+      {
+        "deviceName": "Sharp9",
+        "platformName": "Android",
+        "platformVersion": "9",
+        "port": "4723"
+      },
+      {
+        "deviceName": "samsungA03",
+        "platformName": "Android",
+        "platformVersion": "13",
+        "port": "4725"
+      }
+    ]
+  }
+  
