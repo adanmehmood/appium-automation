@@ -47,7 +47,8 @@ public class TestRunner extends BaseTest {
     @Test
     public void NumberSearchFeature() throws InterruptedException {
     	
-    	  mobileGestures.get().scrollAndClick(() -> pageManager.get().getHomeScreen().getNumberLocatorBtn());
+    	  mobileGestures.get().scrollAndClick(() ->
+    	  pageManager.get().getHomeScreen().getNumberLocatorBtn());
           pageManager.get().getAdsClass().dismissInterstitialAdIfPresent();
           pageManager.get().getNumberLocatorScreen().processCountries();
 	
