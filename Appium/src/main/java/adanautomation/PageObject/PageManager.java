@@ -53,6 +53,7 @@ public class PageManager {
             throw new IllegalArgumentException("Driver cannot be null"); 
         }
         this.driver = driver;
+        
    
     }
     

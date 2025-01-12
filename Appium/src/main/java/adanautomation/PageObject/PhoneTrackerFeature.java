@@ -111,6 +111,51 @@ public class PhoneTrackerFeature {
     
     @AndroidFindBy(id = "com.mobile.number.location.call.number.locator.call.tracker:id/btn_exit")
     private WebElement exitBtn;
+    
+    //add device
+    
+    @AndroidFindBy(id = "com.mobile.number.location.call.number.locator.call.tracker:id/otp1")
+    private WebElement textbox1;
+
+    @AndroidFindBy(id = "com.mobile.number.location.call.number.locator.call.tracker:id/otp2")
+    private WebElement textbox2;
+
+    @AndroidFindBy(id = "com.mobile.number.location.call.number.locator.call.tracker:id/otp3")
+    private WebElement textbox3;
+
+    @AndroidFindBy(id = "com.mobile.number.location.call.number.locator.call.tracker:id/otp4")
+    private WebElement textbox4;
+
+    @AndroidFindBy(id = "com.mobile.number.location.call.number.locator.call.tracker:id/otp5")
+    private WebElement textbox5;
+
+    @AndroidFindBy(id = "com.mobile.number.location.call.number.locator.call.tracker:id/otp6")
+    private WebElement textbox6;
+    
+    @AndroidFindBy(id = "com.mobile.number.location.call.number.locator.call.tracker:id/btn_done")
+    private WebElement  codePasted;
+    
+    //barand request send
+    
+    @AndroidFindBy(id = "com.mobile.number.location.call.number.locator.call.tracker:id/progressBar")
+    private WebElement notificationSendBar;
+    
+    @AndroidFindBy(id = "com.mobile.number.location.call.number.locator.call.tracker:id/btn_done")
+    private WebElement  reqSentDone;
+    
+    //notification from other phone
+    
+//    @AndroidFindBy()
+//    private WebElement ;
+//    
+//    @AndroidFindBy()
+//    private WebElement ;
+//    
+//    @AndroidFindBy()
+//    private WebElement ;
+//    
+//    @AndroidFindBy()
+//    private WebElement ;
 
 
     

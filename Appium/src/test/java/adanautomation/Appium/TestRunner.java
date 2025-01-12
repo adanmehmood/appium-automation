@@ -10,29 +10,56 @@ import java.net.MalformedURLException;
 import java.util.List;
 
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class TestRunner extends AppiumMain {
+public class TestRunner extends BaseTest {
 	
-    private PageManager pageManager;
-    private MobileGestures mobileGestures;
+//    private PageManager pageManager;
+//    private MobileGestures mobileGestures;
+    
+    
    
 
-    @BeforeClass
-    public void setUp() throws MalformedURLException {
-    	
-    	if (driver == null) {
-            throw new IllegalStateException("Driver is not initialized. Check AppiumMain setup.");
-        }
-        // Initialize PageManager with the driver
-        pageManager = new PageManager(driver);
-        mobileGestures = new MobileGestures(driver);
-       // ImageRec imageRec = new ImageRec(driver);
-        
-        
+//    @BeforeClass
+//    public void setUp() throws MalformedURLException {
+//    	
+//    	if (driver == null) {
+//            throw new IllegalStateException("Driver is not initialized. Check AppiumMain setup.");
+//        }
+//        // Initialize PageManager with the driver
+//        pageManager = new PageManager(driver);
+//        mobileGestures = new MobileGestures(driver);
+//       // ImageRec imageRec = new ImageRec(driver);
+//        
+//        
+//    }
+    
+    private ThreadLocal<PageManager> pageManager = new ThreadLocal<>();
+    private ThreadLocal<MobileGestures> mobileGestures = new ThreadLocal<>();
+
+    @BeforeMethod
+    public void setUpPageObjects() {
+        pageManager.set(new PageManager(AppiumMain.getDriver()));
+        mobileGestures.set(new MobileGestures(AppiumMain.getDriver()));
     }
     
     @Test
+    public void NumberSearchFeature() throws InterruptedException {
+    	
+    	  mobileGestures.get().scrollAndClick(() -> pageManager.get().getHomeScreen().getNumberLocatorBtn());
+          pageManager.get().getAdsClass().dismissInterstitialAdIfPresent();
+          pageManager.get().getNumberLocatorScreen().processCountries();
+	
+//    	mobileGestures.scrollAndClick(() -> 
+//    	pageManager.getHomeScreen().getNumberLocatorBtn());
+//        pageManager.getAdsClass().dismissInterstitialAdIfPresent(); 
+//        pageManager.getNumberLocatorScreen().processCountries();
+//        pageManager.getPerformanceUtils().getPerformanceData();
+// 
+    } 
+    
+  /*  @Test
     public void Example() throws InterruptedException {
        pageManager.getPermissionsUtils().allowContactAndroidPermission();
        pageManager.getAdsClass().monitorLogcat();
@@ -52,7 +79,7 @@ public class TestRunner extends AppiumMain {
          
     } 
     
-    @Test
+     @Test
     public void NumberSearchFeature() throws InterruptedException {
 	
     	mobileGestures.scrollAndClick(() -> 
@@ -62,6 +89,7 @@ public class TestRunner extends AppiumMain {
         pageManager.getPerformanceUtils().getPerformanceData();
  
     } 
+   
     
 
     @Test
@@ -146,7 +174,7 @@ public class TestRunner extends AppiumMain {
       
         
         
-    }
+    }*/
 
 }
 

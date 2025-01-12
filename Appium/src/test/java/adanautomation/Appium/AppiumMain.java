@@ -4,11 +4,14 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.openqa.selenium.By;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
+import io.appium.java_client.remote.MobileCapabilityType;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -19,10 +22,36 @@ import java.io.FileReader;
 
 public class AppiumMain {
 	
+	 private static ThreadLocal<AndroidDriver> driver = new ThreadLocal<>();
+
+	    public static void setDriver(String deviceName, String udid, String platformVersion,  String serverUrl) throws MalformedURLException {
+	        UiAutomator2Options options = new UiAutomator2Options()
+	                .setPlatformName("Android")
+	                .setDeviceName(deviceName)
+	                .setUdid(udid)
+	                .setPlatformVersion(platformVersion)
+	                .setAppActivity("com.number.tracker.numbertracker.activities.LauncherActivity")
+	                .setAppPackage("com.mobile.number.location.call.number.locator.call.tracker")
+	                .setAutomationName("UiAutomator2")
+	                .setNoReset(true);
+
+	        driver.set(new AndroidDriver(new URL(serverUrl), options));
+	    }
+
+	    public static AndroidDriver getDriver() {
+	        return driver.get();
+	    }
+
+	    public static void quitDriver() {
+	        if (driver.get() != null) {
+	            driver.get().quit();
+	        }
+	    }
 	
-	public AndroidDriver driver;
 	
-	//new keep if works
+	/*public AndroidDriver driver;
+	
+	
 	 @BeforeClass
 	    public void setup() throws Exception {
 	        // Load the JSON file from the resources folder
@@ -79,6 +108,8 @@ public class AppiumMain {
 		
 //        options.setCapability("appium:enableImageComparison", true);
 //        options.setCapability("appium:visualMatchThreshold", 0.8);
+        
+        
 		
 		 driver = new AndroidDriver(new URL ("http://127.0.0.1:"+ deviceConfig.get("port")), options);
 		 
@@ -87,9 +118,7 @@ public class AppiumMain {
 		// driver.quit();
 		 
 		
-	}
-	
-
+	}*/
 
 }
 

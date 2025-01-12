@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="ParallelTests" parallel="tests" thread-count="2">
+    <test name="sharp9">
+        <parameter name="deviceName" value="Sharp9"/>
+        <parameter name="udid" value="353022081634054"/>
+        <parameter name="platformVersion" value="9"/>
+        <parameter name="serverUrl" value="http://127.0.0.1:4723"/>
+        <classes>
+            <class name="adanautomation.Appium.TestRunner"/>
+        </classes>
+    </test>
+    <test name="samsungA03">
+        <parameter name="deviceName" value="SamsungA03"/>
+        <parameter name="udid" value="R9PRB00D68V"/>
+        <parameter name="platformVersion" value="13"/>
+        <parameter name="serverUrl" value="http://127.0.0.1:4725"/>
+        <classes>
+            <class name="adanautomation.Appium.TestRunner"/>
+        </classes>
+    </test>
+</suite>
